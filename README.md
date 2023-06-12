@@ -25,6 +25,12 @@
         - AnyDesk 실패
     - 리눅스 일반
         - 서비스 실횅, 확인, 종료
-            - systemctl [start|stop|status]]서비스명
+            - systemctl [start|stop|status]서비스명
         - MySQL DB
     - Flask 기본
+
+
+## 4일차 
+- 라즈베리파이 학습
+    -  PyQt5 설치
+    - QtDesigner 설치 및 실행 확인
