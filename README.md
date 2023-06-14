@@ -34,3 +34,20 @@
 - 라즈베리파이 학습
     -  PyQt5 설치
     - QtDesigner 설치 및 실행 확인
+        -  하드웨어 제어 - GPIO
+            - LED / RGB LED 출력
+
+
+## 5일차
+- 라즈베리파이 학습
+    - 네트워크 셋팅(VNC)
+    - RGB LED / Button 클릭
+    -  온습도 센서
+    -  서보모터
+
+
+## 6일차
+- 라즈베리파이 학습
+    - MQTT 통신 
+    - MQTT Broker IP, port 설정, 계정 설정(옵션)
+    - RPI <-- >WPF

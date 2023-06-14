@@ -13,7 +13,7 @@ GPIO.setup(blue, GPIO.OUT)
 
 GPIO.output(red,True)
 GPIO.output(green,True)
-GPIO.output(blue,True)
+GPIO.output(blue,True) # 여기 까지 초기화
 
 try:
     while True:
