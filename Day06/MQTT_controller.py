@@ -10,9 +10,25 @@ import datetime as dt
 import paho.mqtt.client as mqtt
 import Adafruit_DHT as dht
 
+#GPIO
+import RPi.GPIO as GPIO
+
+#GPIO, DHT 설정
 sensor = dht.DHT11 # 초 저가 센서
 rcv_pin = 10
+green = 27
+servo_pin = 18
 
+# green led init
+GPIO.setwarnings(False) # 오류메시지 제거
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(green, GPIO.OUT)
+GPIO.output(green, GPIO.HIGH) # true
+
+#servo init
+GPIO.setup(servo_pin, GPIO.OUT)
+pwm = GPIO.PWM(servo_pin, 100) # 서보모터 속도, 50~100 주파수
+pwm.start(3) # 각도0도 Duty
 
 class publisher(Thread):
     def __init__(self):
@@ -43,9 +59,45 @@ class publisher(Thread):
         self.count = self.count +1
         Timer(2.0, self.publish_data_auto).start() # 2초 마다 출판
 
-class subcriber(Thread):
-    pass # ToBeContinued...
+# 다른곳 데이터를 받아오는 객체
+class subscriber(Thread):
+    def __init__(self): # 생성자
+        Thread.__init__(self)
+        self.host = '210.119.12.55'          
+        # self.host = 'https://personar95.azure.com/iotservice'
+        # self.host = 'personar95.iot.aws-region.amazonaws.com'
+        self.port = 1883
+        self.clientId = 'IOT55_SEB'
+        self.topic = 'pknu/monitor/control/'    
+        print('subscriber 스레드 시작')
+        self.client = mqtt.Client(client_id = self.clientId)
+
+    def run(self): # Thread.start() 함수를 샐행하면 실행되는 함수
+        self.client.on_connect = self.onConnect # 접속이 성공시그널 처리
+        self.client.on_message = self.onMessage # 접속 후 메시지가 수신되면 처리
+        self.client.connect(self.host, self.port)
+        self.client.subscribe(topic = self.topic)
+        self.client.loop_forever()
+
+    def onConnect(self, mqttc, obj, flags, rc):
+        print(f'subscriber 연결됨 rc > {rc}')
+
+    def onMessage(self, mqttc, obj, msg):
+        rcv_msg = str(msg.payload.decode('utf-8'))
+        # print(f'{msg.topic} / {rcv_msg}')
+        data = json.loads(rcv_msg) #json data로 형변환
+        stat = data['STAT']
+        print(f'현재 STAT : {stat}')
+        if (stat =='OPEN'):
+            GPIO.output(green, GPIO.LOW)
+            pwm.ChangeDutyCycle(12) # 90도
+        elif(stat =='CLOSE'):
+            GPIO.output(green, GPIO.HIGH)
+            pwm.ChangeDutyCycle(3) # 90도
+        time.sleep(1.0) # 1초
 
 if __name__ =='__main__':
     thPub = publisher() # publisher 객체생성
+    thSub = subscriber() # subscriber 객체 생성
     thPub.start() # run() 자동실행
+    thSub.start()

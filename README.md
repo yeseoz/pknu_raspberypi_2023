@@ -51,3 +51,11 @@
     - MQTT 통신 
     - MQTT Broker IP, port 설정, 계정 설정(옵션)
     - RPI <-- >WPF
+    - RPI 온습도 센서값 MQTT전송
+    - WPF 모터, LED 제어값 전송
+    - RPI Python paho-mqtt 패키지
+    - WPF C# M2Mqtt 패키지
+
+WPF 모니터링, 컨트롤화면
+
+라즈베리파이 테스트 결과
