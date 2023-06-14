@@ -59,3 +59,5 @@
 WPF 모니터링, 컨트롤화면
 
 라즈베리파이 테스트 결과
+
+<img src="https://raw.githubusercontent.com/yeseoz/pknu_raspberypi_2023/main/image/Mqtt_Monitoring.gif" width="700">
