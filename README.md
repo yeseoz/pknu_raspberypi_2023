@@ -70,3 +70,9 @@ WPF 모니터링, 컨트롤화면
     - libcamera-jpeg -o test.jpg
     - Opencv 설치 sudo pip install opencv-python
 
+
+## 8일차 
+- 소켓 프로그래밍
+     - putty 설치
+     - 라즈베리파이 putty 연동
+
