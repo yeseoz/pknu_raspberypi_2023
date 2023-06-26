@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arps/inet.h>
+#include <sys/socket>
+
+#define BUF_SIZE 100
+#define NAME_SIZE 20
+
+void *send_msg(void *arg);
+void *rexv_msg(void *arg);
+void error_handling(char *msg);
+
+char name[NAME_SIZE] = "[DERAULT]";
+char msg[BUF_SIZE];
+
+int main(int argc, char *argv[])
+{
+	int sock;
+	struct sockaddr_in serv_addr;
+	pthread_t snd_thread, rcv_thread;
+	void *thread_return;
+
+	if(argv!=4)
+	{
+		printf("Usage : %s <IP> <port> <name> \n", argv[0]);
+		exit(1);
+	}
+
+	sprintf(name, "[%s]", argv[3]);
+	sock = socket(PF_INET, SOCK_STREAM, 0);
+
+	memset(&serv_addr

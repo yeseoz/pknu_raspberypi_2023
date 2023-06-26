@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arps/inet.h>
+#include <sys/socket>
+
+#define BUF_SIZE 100
+#define NAME_SIZE 20
+
+void *send_msg(void *arg);
+void *rexv_msg(void *arg);
+void error_handling(char *msg);
+
+char name[NAME_SIZE] = "[DEFAULT
