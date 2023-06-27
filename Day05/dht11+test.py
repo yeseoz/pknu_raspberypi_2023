@@ -3,7 +3,7 @@ import Adafruit_DHT as dht
 import time
 
 sensor = dht.DHT11 # 초 저가 센서
-rcv_pin = 10
+rcv_pin = 17
 
 try:
     while True:

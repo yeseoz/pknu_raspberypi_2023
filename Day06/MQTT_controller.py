@@ -15,7 +15,7 @@ import RPi.GPIO as GPIO
 
 #GPIO, DHT 설정
 sensor = dht.DHT11 # 초 저가 센서
-rcv_pin = 10
+rcv_pin = 17
 green = 27
 servo_pin = 18
 
