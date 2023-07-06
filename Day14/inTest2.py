@@ -16,7 +16,6 @@ buzz = GPIO.PWM(buzzerPin, 440)
 def my_callback(channel):
 	global flag
 	if flag == False:
-		flag = True
 		print(flag)
 	else:
 		flag = False
@@ -32,9 +31,9 @@ try:
 			GPIO.output(ledPin, GPIO.LOW)
 			time.sleep(0.1)
 			buzz.start(50)
-			for i in range(1, 100):
-					buzz.ChangeFrequency(i)
-					time.sleep(0.3)
+			for i in range(0, len(melody)):
+				buzz.ChangeFrequency(melody[i])
+				time.sleep(0.1)
 		else:
 			GPIO.output(ledPin, GPIO.LOW)
 			buzz.stop()

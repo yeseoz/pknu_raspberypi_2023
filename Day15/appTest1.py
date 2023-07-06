@@ -1,0 +1,14 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def gello_world():
+	return "Hello world"
+
+@app.route('/name')
+def namefunc():
+	return "Yeseo"
+
+if __name__ == "__main__":
+	app.run(host="0.0.0.0", port="9000")
